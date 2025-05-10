@@ -1,65 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="container">
-        <div class="header">
-            <div class="header_company">
-                <h1>PHẦN MỀM IN MÃ VẠCH CÔNG TY ÍCH MÀU</h1>
-            </div>
-
-            <div class="header_select-qr">
-                <h2>CHỌN MÃ VẠCH</h2>
-
-                <select name="select-qr" id="select-qr">
-                    <option value="QR">1</option>
-                    <option value="QR">2</option>
-                </select>
-            </div>
+      <div class="header">
+        <div class="header_company">
+          <h1>PHẦN MỀM IN MÃ VẠCH CÔNG TY ÍCH MÀU</h1>
         </div>
 
-        <section class="information">
+        <div class="header_select-qr">
+          <h2>CHỌN MÃ VẠCH</h2>
+          <select name="select-qr" id="select-qr">
+            <option value="QR">1</option>
+            <option value="QR">2</option>
+          </select>
+        </div>
+      </div>
 
-            <div class="information-1">
-                <h2>THÔNG TIN MÃ VẠCH</h2>
-                <ul>
-                    <li>jadsa;</li>
-                </ul>
-            </div>
+      <section>
+        <div class="information">
+          <h2>THÔNG TIN MÃ VẠCH</h2>
+          <div class="list-tem"></div>
+        </div>
 
-            <div class="information-2">
-                <h2>THÔNG TIN TEM</h2>
-                <ul>
-                    <li>jadsa;</li>
-                </ul>
-            </div>
-
-            <div class="information-3">
-                <h2>MÃ QR</h2>
-                <img src="" alt="qr">
-                <button>THOÁT</button>
-            </div>
-
-            <div class="information-sticker">
-                <h2>IN TEM</h2>
-                <button class="print">IN</button>
-                <button class="print-all">IN TOÀN BỘ</button>
-            </div>
-
+        <div class="information-">
+          <h2>MÃ QR</h2>
+          <div id="qrcode"></div>
+          <button class="button-exit">THOÁT</button>
+        </div>
+      </section>
     </div>
 
-    </section>
-    </div>
+    <!-- script -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script>
+      const listTem = document.querySelector(".list-tem");
+      let html = "";
+      const labelData = [
+        {
+          title: "Asia Fashion Consultant Pte Ltd",
+          materialName: ["材料名称:", "Tên liệu", "11-4001TPG Velvetex YM-"],
+          orderNumber: ["客户订单號:", "Mã đơn đặt", "POAF250002943-1"],
+          materialCode: ["材质编号:", "Mã liệu", "J-VVX(H228)"],
+          specification: ["规格:", "Quy cách", '60" LOT: 222'],
+          quantity: ["QTY:", "Số lượng", "100YD"],
+          netWeight: ["净重:", "Số KG:", "23.2KG"],
+          deliveryDate: ["交期日期:", "Ngày giao hàng:", "19.03.2025"],
+          note: ["备注:", "Ghi chú:", "Tổng 1087YD"],
+          origin: ["产地:", "Xuất xứ hàng hoá:", "VIỆT NAM"],
+        },
+      ];
 
-    <script src="script.js"></script>
-</body>
+      //style qr code
+      var qrcode = new QRCode("qrcode", {
+        text: "https://www.facebook.com/tuyetngan.huynh.963",
+        width: 256,
+        height: 256,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H,
+      });
 
+      //close window
+      const button = document.querySelector(".button-exit");
+      button.addEventListener("click", function () {
+        window.close();
+      });
+
+      // handle listitem tem
+      labelData.forEach((item) => {
+        html += `
+        <h3>${item.title}</h3>
+        
+          <div class="wrapper">
+            <div class="wrapper-item">
+            <p>${item.materialName[0]}</p>
+            <p>${item.materialName[1]}</p>
+          </div>
+           <p>${item.materialName[2]}</p>
+          </div>
+
+          <div class="wrapper">
+            <div class="wrapper-item">
+            <p>${item.orderNumber[0]}</p>
+            <p>${item.orderNumber[1]}</p>
+          </div>
+          <p>${item.orderNumber[2]}</p>
+          </div>
+
+          <div class="wrapper">
+            <div class="wrapper-item">
+            <p>${item.materialCode[0]}</p>
+            <p>${item.materialCode[1]}</p>
+          </div>
+          <p>${item.materialCode[2]}</p>
+            </div>
+
+            <div class="wrapper">
+              <div class="wrapper-item">
+              <p>${item.specification[0]}</p>
+            <p>${item.specification[1]}</p>
+          </div>
+          <p>${item.specification[2]}</p>
+            </div>
+
+          <div class="wrapper">
+            <div class="wrapper-item">
+            <p>${item.quantity[0]}</p>
+            <p>${item.quantity[1]}</p>
+             </div>
+          <p>${item.quantity[2]}</p>
+          </div>
+
+          <div class="wrapper">
+              <div class="wrapper-item">
+            <p>${item.netWeight[0]}</p>
+            <p>${item.netWeight[1]}</p>
+          </div>
+          <p>${item.netWeight[2]}</p>   
+          </div>
+
+          <div class="wrapper">
+              <div class="wrapper-item">
+            <p>${item.deliveryDate[0]}</p>
+            <p>${item.deliveryDate[1]}</p>    
+          </div>
+          <p>${item.deliveryDate[2]}</p>  
+          </div>
+
+          <div class="wrapper">
+              <div class="wrapper-item">
+            <p>${item.note[0]}</p>
+            <p>${item.note[1]}</p>    
+          </div>
+          <p>${item.note[2]}</p>
+</div>
+          <div class="wrapper">
+              <div class="wrapper-item">
+            <p>${item.origin[0]}</p>
+            <p>${item.origin[1]}</p>  
+          </div>  
+          <p>${item.origin[2]}</p>
+          </div>
+        `;
+      });
+      listTem.innerHTML = html;
+    </script>
+  </body>
 </html>
